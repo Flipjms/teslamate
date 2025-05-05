@@ -1,0 +1,36 @@
+services:
+  teslamate:
+    image: teslamate/teslamate:latest
+    container_name: teslamate
+    environment:
+      - ENCRYPTION_KEY="${ENCRYPTION_KEY}"
+      - DATABASE_USER=teslamate
+      - DATABASE_PASS="${DATABASE_PASSWORD}"
+      - DATABASE_NAME=teslamate
+      - DATABASE_HOST=database
+      - MQTT_HOST=${MQTT_HOST}
+      - MQTT_PORT=${MQTT_PORT}
+      - MQTT_USER=${MQTT_USER}
+      - MQTT_PASSWORD=${MQTT_PASSWORD}
+      - TZ=Europe/Lisbon
+    ports:
+      - 4000:4000
+    volumes:
+      - ./import:/opt/app/import
+    cap_drop:
+      - all
+    restart: unless-stopped
+
+  database:
+    image: postgres:17
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=teslamate
+      - POSTGRES_PASSWORD="${DATABASE_PASSWORD}"
+      - POSTGRES_DB=teslamate
+    volumes:
+      - teslamate-db:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  teslamate-db:
