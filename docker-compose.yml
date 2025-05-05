@@ -16,8 +16,6 @@ services:
     networks:
       grafana-alloy_main-network:
         ipv4_address: 10.69.10.40
-    ports:
-      - 80:4000
     volumes:
       - ./import:/opt/app/import
     cap_drop:
