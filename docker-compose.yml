@@ -5,7 +5,7 @@ services:
     environment:
       - ENCRYPTION_KEY="${ENCRYPTION_KEY}"
       - DATABASE_USER=teslamate
-      - DATABASE_PASS="${DATABASE_PASSWORD}"
+      - DATABASE_PASS=somePassWord
       - DATABASE_NAME=teslamate
       - DATABASE_HOST=10.69.10.41
       - MQTT_HOST=${MQTT_HOST}
